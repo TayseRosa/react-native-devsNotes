@@ -1,6 +1,6 @@
-import React, { useLayoutEffect } from 'react'
-import { useNavigation } from '@react-navigation/native'
-import { useSelector } from 'react-redux'
+import React, { useLayoutEffect } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
 
 import {
     Container,
@@ -9,21 +9,20 @@ import {
     NotesList,
     NoNotes,
     NoNotesImage,
-    NoNotesText,
-} from './styles.js';
+    NoNotesText
+} from './styles';
 
-import NoteItem from '../../components/NoteItem'
+import NoteItem from '../../components/NoteItem';
 
 export default () => {
     const navigation = useNavigation();
     const list = useSelector(state => state.notes.list);
-    // const list = [];
     
-    useLayoutEffect(()=>{
+    useLayoutEffect(() => {
         navigation.setOptions({
             title: 'Suas notas',
-            headerRight: ()=>(
-                <AddButton underlayColor="transparent" onPress={()=>navigation.navigate('EditNote')} >
+            headerRight: () => (
+                <AddButton underlayColor="transparent" onPress={()=>navigation.navigate('EditNote')}>
                     <AddButtonImage source={require('../../assets/more.png')} />
                 </AddButton>
             )
@@ -31,19 +30,18 @@ export default () => {
     }, []);
 
     const handleNotePress = (index) => {
-        // alert('Clicou em:'+index)
-        navigation.navigate('EditNote',{
+        navigation.navigate('EditNote', {
             key: index
         });
     }
 
-    return(
+    return (
         <Container>
             {list.length > 0 &&
-                <NotesList 
+                <NotesList
                     data={list}
                     renderItem={({item, index})=>(
-                        <NoteItem 
+                        <NoteItem
                             data={item}
                             index={index}
                             onPress={handleNotePress}
@@ -52,7 +50,7 @@ export default () => {
                     keyExtractor={(item, index)=>index.toString()}
                 />
             }
-            {list.length == 0  && 
+            {list.length == 0 &&
                 <NoNotes>
                     <NoNotesImage source={require('../../assets/note.png')} />
                     <NoNotesText>Nenhuma anotação</NoNotesText>

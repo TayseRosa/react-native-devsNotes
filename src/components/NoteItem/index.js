@@ -1,13 +1,10 @@
 import React from 'react';
-import {
-    Box,
-    Title
-} from './styles';
+import { Box, Title } from './styles';
 
-export default({ data, index, onPress })=>{
-    return(
+export default ({ data, index, onPress }) => {
+    return (
         <Box onPress={()=>onPress(index)}>
-            <Title> {data.title} </Title>
+            <Title>{data.title}</Title>
         </Box>
     );
 }
